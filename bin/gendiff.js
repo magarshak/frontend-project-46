@@ -13,5 +13,3 @@ program
     console.log(gendiff(filePath1, filePath2));
   })
   .parse();
-
-// console.log('Welcome to the Diff Tool!');
