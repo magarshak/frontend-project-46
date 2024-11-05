@@ -34,7 +34,7 @@ Options:
 ### Comparison of flat JSON files
 The diff is based on how the files have changed relative to each other, the keys are displayed in alphabetical order.
 ```sh
-gendiff filepath1.json filepath2.json
+gendiff file1.json file2.json
 
 {
   - follow: false
