@@ -18,6 +18,33 @@ $ cd frontend-project-46/
 $ make install
 $ npm link
 ```
+## Usage
+```sh
+$ gendiff -h
+Usage: gendiff [options] <filepath1> <filepath2>
 
+Compares two configuration files and shows a difference.
+
+Options:
+  -V, --version        output the version number
+  -f, --format [type]  output format (choices: "stylish", "plain", "json")
+  -h, --help           display help for command
+```
+## Examples
 ### Comparison of flat JSON files
+The diff is based on how the files have changed relative to each other, the keys are displayed in alphabetical order.
+```sh
+gendiff filepath1.json filepath2.json
+
+{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+}
+```
+The absence of a plus or minus indicates that the key is in both files and its values are the same. In all other situations, the value of the key is either different, or the key is in only one file. In the example above, the timeout key is in both files but has different values, proxy is only in file1 and verbose is only in file2.
+
 [![asciicast](https://asciinema.org/a/kQakEQUm4Q1zABSfZNhs7XwrQ.svg)](https://asciinema.org/a/kQakEQUm4Q1zABSfZNhs7XwrQ)
