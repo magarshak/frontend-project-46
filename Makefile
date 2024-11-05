@@ -4,6 +4,12 @@ install:
 publish:
 	npm publish --dry-run
 
+lint:
+	npx eslint .
+
+lint-fix:
+	npx eslint . --fix
+
 display:
 	cat __fixtures__/file1.json __fixtures__/file2.json
 

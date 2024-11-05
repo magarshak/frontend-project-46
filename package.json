@@ -15,5 +15,18 @@
   "dependencies": {
     "commander": "^12.1.0",
     "lodash": "^4.17.21"
-  }
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.31.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magarshak/frontend-project-46.git"
+  },
+  "bugs": {
+    "url": "https://github.com/magarshak/frontend-project-46/issues"
+  },
+  "homepage": "https://github.com/magarshak/frontend-project-46#readme"
 }
