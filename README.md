@@ -5,7 +5,7 @@
 
 
 ## About project
-__Diff Tool__ - is a program that compares two files, identifies the differences between them, and displays them to the user. It supports the following file formats: JSON, YML, and YAML.
+__Diff Tool__ - is a program that compares two files, identifies the differences between them, and displays them to the user. It supports the following file formats: JSON, YML and YAML.
 
 ## How to install
 Before you start, make sure that:
