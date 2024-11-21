@@ -24,9 +24,11 @@ const gendiff = (filePath1, filePath2) => {
   // Getting absolute file paths based on the current working directory
   const path1 = path.resolve(process.cwd(), filePath1);
   const path2 = path.resolve(process.cwd(), filePath2);
+
   // Reading the files by the received paths
   const file1 = readFileSync(path1, 'utf-8');
   const file2 = readFileSync(path2, 'utf-8');
+  
   // JSON parsing
   const data1 = JSON.parse(file1);
   const data2 = JSON.parse(file2);
