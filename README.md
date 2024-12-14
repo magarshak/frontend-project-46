@@ -32,7 +32,8 @@ Options:
   -h, --help           display help for command
 ```
 ## Examples
-### Comparison of flat JSON files
+### Comparison of flat files
+#### JSON 
 The diff is based on how the files have changed relative to each other, the keys are displayed in alphabetical order.
 ```sh
 gendiff file1.json file2.json
@@ -48,4 +49,13 @@ gendiff file1.json file2.json
 ```
 The absence of a plus or minus indicates that the key is in both files and its values are the same. In all other situations, the value of the key is either different, or the key is in only one file. In the example above, the timeout key is in both files but has different values, proxy is only in file1 and verbose is only in file2.
 
-[![asciicast](https://asciinema.org/a/kQakEQUm4Q1zABSfZNhs7XwrQ.svg)](https://asciinema.org/a/kQakEQUm4Q1zABSfZNhs7XwrQ)
+[![asciicast](https://asciinema.org/a/OYCUDNPCjATTZuaffNV6X5EJn.svg)](https://asciinema.org/a/OYCUDNPCjATTZuaffNV6X5EJn)
+
+#### YAML/YML
+Similar to the previous one, we now compare flat YAML/YML files.
+
+[![asciicast](https://asciinema.org/a/rEYrGOPgspzaSa7lKtvdfA9ap.svg)](https://asciinema.org/a/rEYrGOPgspzaSa7lKtvdfA9ap)
+
+### Recursive comparison
+
+### Using the utility by displaying reference information
