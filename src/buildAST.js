@@ -1,6 +1,8 @@
+import _ from 'lodash';
+
 const buildAST = (data1, data2) => {
-  const keys = [...new Set([...Object.keys(data1), ...Object.keys(data2)])];
-  const sortedKeys = keys.sort();
+  const keys = _.union(Object.keys(data1), Object.keys(data2));
+  const sortedKeys = _.sortBy(keys);
 
   const children = sortedKeys.map((key) => {
     if (!(key in data1)) {
@@ -17,9 +19,9 @@ const buildAST = (data1, data2) => {
       };
     } if (
       typeof data1[key] === 'object'
-        && !Array.isArray(data1[key])
-        && typeof data2[key] === 'object'
-        && !Array.isArray(data2[key])
+      && !Array.isArray(data1[key])
+      && typeof data2[key] === 'object'
+      && !Array.isArray(data2[key])
     ) {
       return {
         type: 'nested',
