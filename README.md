@@ -56,13 +56,87 @@ Similar to the previous one, we now compare flat YAML/YML files.
 
 [![asciicast](https://asciinema.org/a/rEYrGOPgspzaSa7lKtvdfA9ap.svg)](https://asciinema.org/a/rEYrGOPgspzaSa7lKtvdfA9ap)
 
-### Comparing files with nested structures
 
-[![asciicast](https://asciinema.org/a/ntmIvMDHKTNKSle47IAdmEk6G.svg)](https://asciinema.org/a/ntmIvMDHKTNKSle47IAdmEk6G)
-
-### Output formats
-For integration with other systems or simply for ease of perception, the diff between files can also be displayed in different ways in different formats.
+### Comparison files with nested structures
+Diff Tool can be used to compare files with nested structure.
+```sh
+    common: {
+      + follow: false
+        setting1: Value 1
+      - setting2: 200
+      - setting3: true
+      + setting3: null
+      + setting4: blah blah
+      + setting5: {
+            key5: value5
+        }
+        setting6: {
+            doge: {
+              - wow: 
+              + wow: so much
+            }
+            key: value
+          + ops: vops
+        }
+    }
+```
+For integration with other systems or simply for ease of perception, the diff between files can also be displayed in different ways in different output formats.
 For this cases you can use option `-f, --format [type]`
+
+#### Stylish format
+The default format. If the user does not specify a particular output format, the result is printed in stylish format.
+
+```sh
+gendiff --format stylish file1.json file2.json
+
+{
+    common: {
+      + follow: false
+        setting1: Value 1
+      - setting2: 200
+      - setting3: true
+      + setting3: null
+      + setting4: blah blah
+      + setting5: {
+            key5: value5
+        }
+        setting6: {
+            doge: {
+              - wow: 
+              + wow: so much
+            }
+            key: value
+          + ops: vops
+        }
+    }
+    group1: {
+      - baz: bas
+      + baz: bars
+        foo: bar
+      - nest: {
+            key: value
+        }
+      + nest: str
+    }
+  - group2: {
+        abc: 12345
+        deep: {
+            id: 45
+        }
+    }
+  + group3: {
+        deep: {
+            id: {
+                number: 45
+            }
+        }
+        fee: 100500
+    }
+}`
+```
+
+[![asciicast](https://asciinema.org/a/5xuUrUS7ZOCtp9dgmN4GV4RtO.svg)](https://asciinema.org/a/5xuUrUS7ZOCtp9dgmN4GV4RtO)
+
 #### Plain format
 ```sh
 gendiff --format plain file1.json file2.json

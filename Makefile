@@ -31,6 +31,9 @@ gendiff:
 run-json:
 	node bin/gendiff __fixtures__/file1.json __fixtures__/file2.json
 
+run-json-stylish:
+	node bin/gendiff __fixtures__/file1.json __fixtures__/file2.json --format stylish
+
 run-json-plain:
 	node bin/gendiff __fixtures__/file1.json __fixtures__/file2.json --format plain
 
