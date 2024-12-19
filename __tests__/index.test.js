@@ -1,17 +1,42 @@
 import path from 'node:path';
 import gendiff from '../src/index.js';
-import result from '../__fixtures__/result.js';
+import resultStylish from '../__fixtures__/resultStylish.js';
+import resultPlain from '../__fixtures__/resultPlain.js';
+import resultJSON from '../__fixtures__/resultJSON.js';
+import stylishDiff from '../src/formatters/stylish.js';
+import { iter } from '../src/formatters/plain.js';
 
-const getFixturePath = (filename) => path.join('__fixtures__', filename);
+const supportedFormats = [
+  'json',
+  'yml',
+];
 
-test('check json plain', () => {
-  expect(gendiff(getFixturePath('file1.json'), getFixturePath('file2.json'))).toEqual(result);
-});
+const resolvePath = (filePath) => path.resolve(process.cwd(), `__fixtures__/${filePath}`);
 
-test('check yaml plain', () => {
-  expect(gendiff(getFixturePath('file1.yaml'), getFixturePath('file2.yaml'))).toEqual(result);
-});
+describe('gendiff', () => {
+  supportedFormats.forEach((format) => {
+    const filePath1 = resolvePath(`file1.${format}`);
+    const filePath2 = resolvePath(`file2.${format}`);
 
-test('check yml plain', () => {
-  expect(gendiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'))).toEqual(result);
+    test(`compares ${format} files with different formatters`, () => {
+      expect(gendiff(filePath1, filePath2)).toEqual(resultStylish);
+      expect(gendiff(filePath1, filePath2, 'stylish')).toEqual(resultStylish);
+      expect(gendiff(filePath1, filePath2, 'plain')).toEqual(resultPlain);
+      expect(gendiff(filePath1, filePath2, 'json')).toEqual(resultJSON);
+    });
+  });
+
+  test('throws error for unsupported data in stylish formatter', () => {
+    const invalidData = [{
+      type: 'unknownType',
+    }];
+
+    expect(() => stylishDiff(invalidData)).toThrow(Error('Unsupported data'));
+  });
+
+  test('throws error for unsupported data in plain formatter', () => {
+    const unsupportedFixture = [{ type: 'unsupported' }];
+    expect(() => iter(unsupportedFixture, []))
+      .toThrow(new Error('Unsupported data'));
+  });
 });

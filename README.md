@@ -5,7 +5,7 @@
 
 
 ## About project
-__Diff Tool__ - is a program that compares two files, identifies the differences between them, and displays them to the user. It supports the following file formats: JSON, YML and YAML.
+__Diff Tool__ - is a program that compares two files, identifies the differences between them, and displays them to the user. It supports the following file formats: JSON, YAML and YML.
 
 ## How to install
 Before you start, make sure that:
@@ -56,6 +56,36 @@ Similar to the previous one, we now compare flat YAML/YML files.
 
 [![asciicast](https://asciinema.org/a/rEYrGOPgspzaSa7lKtvdfA9ap.svg)](https://asciinema.org/a/rEYrGOPgspzaSa7lKtvdfA9ap)
 
-### Recursive comparison
+### Comparing files with nested structures
 
-### Using the utility by displaying reference information
+[![asciicast](https://asciinema.org/a/ntmIvMDHKTNKSle47IAdmEk6G.svg)](https://asciinema.org/a/ntmIvMDHKTNKSle47IAdmEk6G)
+
+### Output formats
+For integration with other systems or simply for ease of perception, the diff between files can also be displayed in different ways in different formats.
+For this cases you can use option `-f, --format [type]`
+#### Plain format
+```sh
+gendiff --format plain file1.json file2.json
+
+Property 'common.follow' was added with value: false
+Property 'common.setting2' was removed
+Property 'common.setting3' was updated. From true to null
+Property 'common.setting4' was added with value: 'blah blah'
+Property 'common.setting5' was added with value: [complex value]
+Property 'common.setting6.doge.wow' was updated. From '' to 'so much'
+Property 'common.setting6.ops' was added with value: 'vops'
+Property 'group1.baz' was updated. From 'bas' to 'bars'
+Property 'group1.nest' was updated. From [complex value] to 'str'
+Property 'group2' was removed
+Property 'group3' was added with value: [complex value]
+```
+
+[![asciicast](https://asciinema.org/a/NVgZUFvZ9ULXaRnKBEqN6TEso.svg)](https://asciinema.org/a/NVgZUFvZ9ULXaRnKBEqN6TEso)
+
+#### JSON format
+```sh
+gendiff --format json file1.json file2.json
+
+{"type":"root","children":[{"type":"nested","key":"common","children":[{"type":"added","key":"follow","value":false},{"type":"unchanged","key":"setting1","value":"Value 1"},{"type":"removed","key":"setting2","value":200},{"type":"changed","key":"setting3","oldValue":true,"newValue":null},{"type":"added","key":"setting4","value":"blah blah"},{"type":"added","key":"setting5","value":{"key5":"value5"}},{"type":"nested","key":"setting6","children":[{"type":"nested","key":"doge","children":[{"type":"changed","key":"wow","oldValue":"","newValue":"so much"}]},{"type":"unchanged","key":"key","value":"value"},{"type":"added","key":"ops","value":"vops"}]}]},{"type":"nested","key":"group1","children":[{"type":"changed","key":"baz","oldValue":"bas","newValue":"bars"},{"type":"unchanged","key":"foo","value":"bar"},{"type":"changed","key":"nest","oldValue":{"key":"value"},"newValue":"str"}]},{"type":"removed","key":"group2","value":{"abc":12345,"deep":{"id":45}}},{"type":"added","key":"group3","value":{"deep":{"id":{"number":45}},"fee":100500}}]}
+```
+[![asciicast](https://asciinema.org/a/T59hGKUScsVI5tS6toq0yYAQs.svg)](https://asciinema.org/a/T59hGKUScsVI5tS6toq0yYAQs)

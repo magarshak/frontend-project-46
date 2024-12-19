@@ -31,6 +31,12 @@ gendiff:
 run-json:
 	node bin/gendiff __fixtures__/file1.json __fixtures__/file2.json
 
+run-json-plain:
+	node bin/gendiff __fixtures__/file1.json __fixtures__/file2.json --format plain
+
+run-json-structured:
+	node bin/gendiff __fixtures__/file1.json __fixtures__/file2.json --format json
+
 run-yaml:
 	node bin/gendiff __fixtures__/file1.yaml __fixtures__/file2.yaml
 
